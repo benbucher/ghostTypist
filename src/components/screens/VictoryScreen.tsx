@@ -1,0 +1,65 @@
+import React, { useEffect } from 'react';
+import { useGame } from '../../context/GameContext';
+import { TrophyIcon } from 'lucide-react';
+
+const VictoryScreen: React.FC = () => {
+  const { score, mistakesMade, resetGame } = useGame();
+  
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        handlePlayAgain();
+      }
+    };
+    
+    window.addEventListener('keypress', handleKeyPress);
+    return () => window.removeEventListener('keypress', handleKeyPress);
+  }, [resetGame]);
+  
+  const handlePlayAgain = () => {
+    resetGame();
+    // Start the game immediately instead of going to start screen
+    setTimeout(() => {
+      document.dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
+    }, 0);
+  };
+  
+  return (
+    <div className="text-center flex flex-col items-center justify-center min-h-[80vh] relative">
+      <div className="absolute inset-0 flex items-center justify-center opacity-20">
+        <div className="w-full h-full absolute bg-gradient-radial from-green-600/30 to-transparent"></div>
+      </div>
+      
+      {/* Mist effects */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-900/20 to-transparent"></div>
+      
+      <div className="relative z-10 space-y-8">
+        <div className="animate-float mb-8">
+          <TrophyIcon size={96} className="mx-auto text-yellow-300/80 animate-pulse" />
+        </div>
+        
+        <h1 className="text-5xl font-bold mb-4 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-amber-300">
+          You Survived!
+        </h1>
+        
+        <div className="text-violet-300 text-xl">
+          <p className="mb-2">Final Score: <span className="font-bold">{score}</span></p>
+          <p>Mistakes Made: <span className="font-bold">{mistakesMade}</span></p>
+        </div>
+        
+        <button 
+          onClick={handlePlayAgain}
+          className="mt-8 px-8 py-3 bg-violet-700 hover:bg-violet-600 text-white rounded-lg text-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-violet-500/50 focus:outline-none focus:ring-2 focus:ring-violet-400"
+        >
+          Play Again
+        </button>
+        
+        <div className="mt-4 text-violet-400/80 text-sm">
+          <p>Press Enter to play again</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default VictoryScreen;
