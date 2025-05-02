@@ -3,7 +3,7 @@ import { useGame } from '../../context/GameContext';
 import { TrophyIcon } from 'lucide-react';
 
 const VictoryScreen: React.FC = () => {
-  const { score, mistakesMade, resetGame } = useGame();
+  const { score, mistakesMade, resetGame, timeElapsed } = useGame();
   
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -22,6 +22,12 @@ const VictoryScreen: React.FC = () => {
     setTimeout(() => {
       document.dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
     }, 0);
+  };
+
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
   
   return (
@@ -42,8 +48,9 @@ const VictoryScreen: React.FC = () => {
           You Survived!
         </h1>
         
-        <div className="text-violet-300 text-xl">
-          <p className="mb-2">Final Score: <span className="font-bold">{score}</span></p>
+        <div className="text-violet-300 text-xl space-y-2">
+          <p>Time Survived: <span className="font-bold">{formatTime(timeElapsed)}</span></p>
+          <p>Final Score: <span className="font-bold">{score}</span></p>
           <p>Mistakes Made: <span className="font-bold">{mistakesMade}</span></p>
         </div>
         
