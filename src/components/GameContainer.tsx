@@ -10,7 +10,6 @@ const GameContainer: React.FC = () => {
   const { state } = useGame();
   const { startBackgroundMusic, stopBackgroundMusic } = useSound();
   
-  // Start background music when the component mounts
   useEffect(() => {
     if (state === 'start') {
       startBackgroundMusic();
@@ -22,7 +21,7 @@ const GameContainer: React.FC = () => {
   }, [state, startBackgroundMusic, stopBackgroundMusic]);
   
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 relative">
+    <div className="w-full max-w-4xl relative">
       {state === 'start' && <StartScreen />}
       {state === 'playing' && <GameScreen />}
       {state === 'gameover' && <GameOverScreen />}
@@ -31,4 +30,4 @@ const GameContainer: React.FC = () => {
   );
 };
 
-export default GameContainer;
+export default GameContainer

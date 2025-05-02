@@ -32,13 +32,6 @@ const GameOverScreen: React.FC = () => {
   
   return (
     <div className="text-center flex flex-col items-center justify-center min-h-[80vh] relative">
-      <div className="absolute inset-0 flex items-center justify-center opacity-20">
-        <div className="w-full h-full absolute bg-gradient-radial from-red-600/30 to-transparent"></div>
-      </div>
-      
-      {/* Mist effects */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-900/20 to-transparent"></div>
-      
       <div className="relative z-10 space-y-8">
         <div className="animate-float mb-8">
           <GhostIcon size={96} className="mx-auto text-red-300/80 animate-pulse" />
@@ -69,4 +62,4 @@ const GameOverScreen: React.FC = () => {
   );
 };
 
-export default GameOverScreen;
+export default GameOverScreen

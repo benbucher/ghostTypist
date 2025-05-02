@@ -22,14 +22,6 @@ const GameScreen: React.FC = () => {
   
   return (
     <div className="flex flex-col min-h-[80vh] relative">
-      {/* Background effects */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-10">
-        <div className="w-full h-full absolute bg-gradient-radial from-indigo-600/30 to-transparent"></div>
-      </div>
-      
-      {/* Mist effect at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-900/20 to-transparent"></div>
-      
       {/* Game content */}
       <div className="relative z-10 flex-1 flex flex-col justify-between">
         <div className="mb-8 text-center">
