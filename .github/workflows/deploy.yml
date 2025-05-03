@@ -1,4 +1,4 @@
-name: Deploy with gh-pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -20,10 +20,13 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Deploy to gh-pages
-        run: npm run deploy
-        env:
-          GIT_USER: ${{ github.actor }}
-          GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
