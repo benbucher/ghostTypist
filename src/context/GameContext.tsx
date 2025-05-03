@@ -55,7 +55,7 @@ const countMistakes = (input: string, target: string): number => {
   }, 0);
 };
 
-const GHOST_SPEED = 0.2; // Base speed for ghost movement
+const GHOST_SPEED = 0.3; // Base speed for ghost movement
 const SCORE_MULTIPLIER = 0.5; // Multiplier for score to progress bar impact
 const PERFECT_WORD_BONUS = 1; // Bonus character for perfect word completion
 
