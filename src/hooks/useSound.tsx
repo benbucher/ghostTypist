@@ -8,10 +8,10 @@ interface SoundMap {
 
 const SOUNDS: SoundMap = {
   start: 'https://assets.mixkit.co/active_storage/sfx/2005/2005-preview.mp3',
-  correct: 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3',
-  mistake: 'https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3',
-  gameOver: 'https://assets.mixkit.co/active_storage/sfx/1996/1996-preview.mp3',
-  background: 'https://assets.mixkit.co/active_storage/sfx/151/151-preview.mp3',
+  correct: `${import.meta.env.BASE_URL}sounds/correct.wav`,
+  mistake: `${import.meta.env.BASE_URL}sounds/mistake.wav`,
+  gameOver: `${import.meta.env.BASE_URL}sounds/gameOver.wav`,
+  background: 'https://assets.mixkit.co/active_storage/sfx/2005/2005-preview.mp3',
 };
 
 export default function useSound() {
