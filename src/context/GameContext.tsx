@@ -55,9 +55,16 @@ const countMistakes = (input: string, target: string): number => {
   }, 0);
 };
 
-const GHOST_SPEED = 0.3; // Base speed for ghost movement
+const BASE_GHOST_SPEED = 0.2; // Initial speed for ghost movement
+const SPEED_INCREASE = 0.05;
+const SPEED_INCREASE_INTERVAL = 30; // seconds
 const SCORE_MULTIPLIER = 0.5; // Multiplier for score to progress bar impact
 const PERFECT_WORD_BONUS = 1; // Bonus character for perfect word completion
+
+const calculateGhostSpeed = (timeElapsed: number): number => {
+  const speedIncrements = Math.floor(timeElapsed / SPEED_INCREASE_INTERVAL);
+  return BASE_GHOST_SPEED + (speedIncrements * SPEED_INCREASE);
+};
 
 type Action =
   | { type: 'START_GAME' }
@@ -107,7 +114,8 @@ const gameReducer = (state: GameContextType, action: Action): GameContextType =>
         isGhostAngry: mistakes > 0,
       };
     case 'UPDATE_GHOST':
-      const newPosition = state.ghostPosition - GHOST_SPEED;
+      const currentSpeed = calculateGhostSpeed(state.timeElapsed);
+      const newPosition = state.ghostPosition - currentSpeed;
       
       if (newPosition <= 0) {
         return {
