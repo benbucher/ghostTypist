@@ -6,25 +6,22 @@ interface WordDisplayProps {
 }
 
 const WordDisplay: React.FC<WordDisplayProps> = ({ word, typedWord }) => {
-  // Split the current word into characters to color them individually
   const characters = word.split('');
   
   return (
-    <div className="py-8">
-      <div className="text-5xl font-mono tracking-wider min-h-16 flex justify-center">
+    <div className="py-4 md:py-8">
+      <div className="text-3xl md:text-5xl font-mono tracking-wider min-h-[3rem] md:min-h-[4rem] flex justify-center items-center">
         {characters.map((char, index) => {
           let className;
           
           if (index < typedWord.length) {
-            // Character has been typed
             className = typedWord[index] === char
               ? 'text-green-400' // Correct
               : 'text-red-400';  // Incorrect
           } else {
-            // Character not yet typed
             className = index === typedWord.length
-              ? 'text-violet-200 border-b-2 border-violet-400 animate-pulse' // Current character
-              : 'text-violet-300/80'; // Future character
+              ? 'text-violet-200 border-b-2 border-violet-400 animate-pulse'
+              : 'text-violet-300/80';
           }
           
           return (

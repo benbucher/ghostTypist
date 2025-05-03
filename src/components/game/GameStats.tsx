@@ -12,20 +12,20 @@ const GameStats: React.FC = () => {
   };
   
   return (
-    <div className="flex justify-between items-center max-w-2xl mx-auto mb-4 bg-slate-800/80 backdrop-blur-sm rounded-lg p-4 border border-slate-700">
-      <div className="flex items-center space-x-2">
-        <Clock size={20} className="text-sky-300" />
-        <span className="text-xl font-medium">{formatTime(timeElapsed)}</span>
+    <div className="flex justify-between items-center max-w-2xl mx-auto bg-slate-800/80 backdrop-blur-sm rounded-lg p-2 md:p-4 border border-slate-700">
+      <div className="flex items-center space-x-1 md:space-x-2">
+        <Clock size={16} className="text-sky-300 md:scale-125" />
+        <span className="text-base md:text-xl font-medium">{formatTime(timeElapsed)}</span>
       </div>
       
-      <div className="flex items-center space-x-2">
-        <Star size={20} className="text-yellow-300" />
-        <span className="text-xl font-medium">{score}</span>
+      <div className="flex items-center space-x-1 md:space-x-2">
+        <Star size={16} className="text-yellow-300 md:scale-125" />
+        <span className="text-base md:text-xl font-medium">{score}</span>
       </div>
       
-      <div className="flex items-center space-x-2">
-        <span className="text-red-400 text-xs uppercase font-medium">Mistakes</span>
-        <span className="text-xl font-medium">{mistakesMade}</span>
+      <div className="flex items-center space-x-1 md:space-x-2">
+        <span className="text-red-400 text-[10px] md:text-xs uppercase font-medium">Mistakes</span>
+        <span className="text-base md:text-xl font-medium">{mistakesMade}</span>
       </div>
     </div>
   );

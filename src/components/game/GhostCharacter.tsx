@@ -2,7 +2,7 @@ import React from 'react';
 import { Ghost } from 'lucide-react';
 
 interface GhostCharacterProps {
-  position: number; // 0-100
+  position: number;
   isAngry: boolean;
 }
 
@@ -20,21 +20,18 @@ const GhostCharacter: React.FC<GhostCharacterProps> = ({ position, isAngry }) =>
       }}
     >
       <div className="relative">
-        {/* Ghost shadow */}
-        <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-purple-900/30 rounded-full filter blur-md"></div>
+        <div className="absolute -bottom-2 md:-bottom-4 left-1/2 transform -translate-x-1/2 w-12 md:w-16 h-3 md:h-4 bg-purple-900/30 rounded-full filter blur-md"></div>
         
-        {/* Ghost icon */}
         <Ghost 
-          size={80} 
+          size={48}
           className={`${
             isAngry 
               ? 'text-red-300 animate-ghost-angry' 
               : 'text-violet-300/90 animate-pulse'
-          } transition-colors duration-300`}
+          } transition-colors duration-300 md:scale-150`}
           strokeWidth={1.5}
         />
         
-        {/* Glow effect */}
         <div className={`absolute inset-0 rounded-full ${
           isAngry ? 'bg-red-500/20' : 'bg-violet-500/20'
         } filter blur-xl -z-10 scale-75 opacity-60`}></div>
