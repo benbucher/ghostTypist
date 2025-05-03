@@ -7,11 +7,11 @@ interface SoundMap {
 }
 
 const SOUNDS: SoundMap = {
-  start: 'https://freesound.org/data/previews/536/536108_9538756-lq.mp3',
-  correct: 'https://freesound.org/data/previews/382/382310_7089495-lq.mp3',
-  mistake: 'https://freesound.org/data/previews/511/511484_4943963-lq.mp3',
-  gameOver: 'https://freesound.org/data/previews/417/417486_8338344-lq.mp3',
-  background: 'https://freesound.org/data/previews/465/465822_9513963-lq.mp3',
+  start: 'https://assets.mixkit.co/active_storage/sfx/2005/2005-preview.mp3',
+  correct: 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3',
+  mistake: 'https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3',
+  gameOver: 'https://assets.mixkit.co/active_storage/sfx/1996/1996-preview.mp3',
+  background: 'https://assets.mixkit.co/active_storage/sfx/151/151-preview.mp3',
 };
 
 export default function useSound() {
@@ -24,10 +24,10 @@ export default function useSound() {
       
       if (key === 'background') {
         audio.loop = true;
-        audio.volume = 0.3;
+        audio.volume = 0.2;
         backgroundMusicRef.current = audio;
       } else {
-        audio.volume = 0.5;
+        audio.volume = 0.4;
       }
       
       audioElements.current[key] = audio;
