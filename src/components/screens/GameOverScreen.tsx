@@ -18,7 +18,6 @@ const GameOverScreen: React.FC = () => {
   
   const handleTryAgain = () => {
     resetGame();
-    // Start the game immediately instead of going to start screen
     setTimeout(() => {
       document.dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
     }, 0);
@@ -41,7 +40,7 @@ const GameOverScreen: React.FC = () => {
           The Ghost Caught You!
         </h1>
         
-        <div className="text-violet-300 text-xl space-y-2">
+        <div className="text-sky-300 text-xl space-y-2">
           <p>Time Survived: <span className="font-bold">{formatTime(timeElapsed)}</span></p>
           <p>Final Score: <span className="font-bold">{score}</span></p>
           <p>Mistakes Made: <span className="font-bold">{mistakesMade}</span></p>
@@ -49,12 +48,12 @@ const GameOverScreen: React.FC = () => {
         
         <button 
           onClick={handleTryAgain}
-          className="mt-8 px-8 py-3 bg-violet-700 hover:bg-violet-600 text-white rounded-lg text-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-violet-500/50 focus:outline-none focus:ring-2 focus:ring-violet-400"
+          className="mt-8 px-8 py-3 bg-sky-700 hover:bg-sky-600 text-white rounded-lg text-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-sky-500/50 focus:outline-none focus:ring-2 focus:ring-sky-400"
         >
           Try Again
         </button>
         
-        <div className="mt-4 text-violet-400/80 text-sm">
+        <div className="mt-4 text-sky-400/80 text-sm">
           <p>Press Enter to try again</p>
         </div>
       </div>

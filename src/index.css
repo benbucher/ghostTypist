@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-indigo-950 text-gray-100 font-sans;
+    @apply bg-slate-900 text-gray-100 font-sans;
     overflow-x: hidden;
   }
 }

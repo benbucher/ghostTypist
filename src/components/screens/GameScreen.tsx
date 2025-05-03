@@ -8,21 +8,18 @@ const GameScreen: React.FC = () => {
   const { currentWord, input, setInput, ghostPosition, isGhostAngry } = useGame();
   const inputRef = useRef<HTMLInputElement>(null);
   
-  // Focus input on mount
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
   
-  // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
   
   return (
     <div className="flex flex-col min-h-[80vh] relative">
-      {/* Game content */}
       <div className="relative z-10 flex-1 flex flex-col justify-between">
         <div className="mb-8 text-center">
           <GameStats />
@@ -42,7 +39,7 @@ const GameScreen: React.FC = () => {
             type="text"
             value={input}
             onChange={handleInputChange}
-            className="w-full max-w-lg mx-auto block p-4 text-2xl text-center bg-indigo-950 border-2 border-violet-500/50 rounded-lg focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/50 transition-all"
+            className="w-full max-w-lg mx-auto block p-4 text-2xl text-center bg-slate-800 border-2 border-sky-500/50 rounded-lg focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-400/50 transition-all"
             autoComplete="off"
             autoCapitalize="off"
             autoCorrect="off"
@@ -53,6 +50,6 @@ const GameScreen: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
-export default GameScreen
+export default GameScreen;

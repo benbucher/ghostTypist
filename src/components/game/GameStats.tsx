@@ -12,9 +12,9 @@ const GameStats: React.FC = () => {
   };
   
   return (
-    <div className="flex justify-between items-center max-w-2xl mx-auto mb-4 bg-indigo-900/30 backdrop-blur-sm rounded-lg p-4 border border-indigo-800/50">
+    <div className="flex justify-between items-center max-w-2xl mx-auto mb-4 bg-slate-800/80 backdrop-blur-sm rounded-lg p-4 border border-slate-700">
       <div className="flex items-center space-x-2">
-        <Clock size={20} className="text-violet-300" />
+        <Clock size={20} className="text-sky-300" />
         <span className="text-xl font-medium">{formatTime(timeElapsed)}</span>
       </div>
       
