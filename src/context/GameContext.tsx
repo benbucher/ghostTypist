@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { generateWord } from '../utils/wordGenerator';
 import useSound from '../hooks/useSound';
 
-export type GameState = 'start' | 'playing' | 'gameover' | 'victory';
+export type GameState = 'start' | 'playing' | 'gameover';
 
 interface GameContextType {
   state: GameState;
@@ -89,7 +89,7 @@ const gameReducer = (state: GameContextType, action: Action): GameContextType =>
       return {
         ...state,
         input: action.payload,
-        isGhostAngry: false, // Reset anger state on new input
+        isGhostAngry: false,
       };
     case 'WORD_COMPLETED':
       const wordScore = calculateWordScore(action.payload.input, action.payload.target);

@@ -3,7 +3,6 @@ import { useGame } from '../context/GameContext';
 import StartScreen from './screens/StartScreen';
 import GameScreen from './screens/GameScreen';
 import GameOverScreen from './screens/GameOverScreen';
-import VictoryScreen from './screens/VictoryScreen';
 import useSound from '../hooks/useSound';
 
 const GameContainer: React.FC = () => {
@@ -25,9 +24,8 @@ const GameContainer: React.FC = () => {
       {state === 'start' && <StartScreen />}
       {state === 'playing' && <GameScreen />}
       {state === 'gameover' && <GameOverScreen />}
-      {state === 'victory' && <VictoryScreen />}
     </div>
   );
 };
 
-export default GameContainer
+export default GameContainer;
