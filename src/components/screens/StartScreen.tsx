@@ -39,7 +39,7 @@ const StartScreen: React.FC = () => {
           Start Game
         </button>
         
-        <div className="mt-4 text-sky-400/80 text-sm">
+        <div className="mt-4 text-sky-400/80 text-sm hidden md:block">
           <p>Press Enter to start</p>
         </div>
       </div>

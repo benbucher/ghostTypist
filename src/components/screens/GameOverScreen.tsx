@@ -53,12 +53,12 @@ const GameOverScreen: React.FC = () => {
           Try Again
         </button>
         
-        <div className="mt-4 text-sky-400/80 text-sm">
+        <div className="mt-4 text-sky-400/80 text-sm hidden md:block">
           <p>Press Enter to try again</p>
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default GameOverScreen
+export default GameOverScreen;
