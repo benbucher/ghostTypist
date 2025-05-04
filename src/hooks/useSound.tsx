@@ -7,11 +7,11 @@ interface SoundMap {
 }
 
 const SOUNDS: SoundMap = {
-  start: 'https://assets.mixkit.co/active_storage/sfx/2005/2005-preview.mp3',
+  start: `${import.meta.env.BASE_URL}sounds/background.mp3`,
   correct: `${import.meta.env.BASE_URL}sounds/correct.wav`,
   mistake: `${import.meta.env.BASE_URL}sounds/mistake.wav`,
   gameOver: `${import.meta.env.BASE_URL}sounds/gameOver.wav`,
-  background: 'https://assets.mixkit.co/active_storage/sfx/2005/2005-preview.mp3',
+  background: `${import.meta.env.BASE_URL}sounds/start.mp3`,
 };
 
 export default function useSound() {
