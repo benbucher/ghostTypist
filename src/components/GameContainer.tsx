@@ -7,17 +7,26 @@ import useSound from '../hooks/useSound';
 
 const GameContainer: React.FC = () => {
   const { state } = useGame();
-  const { startBackgroundMusic, stopBackgroundMusic } = useSound();
+  const { startBackgroundMusic, stopBackgroundMusic, startMenuMusic, stopMenuMusic } = useSound();
   
   useEffect(() => {
-    if (state === 'start') {
+    if (state === 'playing') {
+      stopMenuMusic();
       startBackgroundMusic();
+    } else if (state === 'start') {
+      stopBackgroundMusic();
+      startMenuMusic();
+    } else if (state === 'gameover') {
+      stopBackgroundMusic();
+      startMenuMusic();
     }
     
     return () => {
-      stopBackgroundMusic();
+      if (state === 'playing') {
+        stopBackgroundMusic();
+      }
     };
-  }, [state, startBackgroundMusic, stopBackgroundMusic]);
+  }, [state, startBackgroundMusic, stopBackgroundMusic, startMenuMusic, stopMenuMusic]);
   
   return (
     <div className="w-full max-w-4xl relative">

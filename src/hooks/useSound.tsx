@@ -7,16 +7,17 @@ interface SoundMap {
 }
 
 const SOUNDS: SoundMap = {
-  start: `${import.meta.env.BASE_URL}sounds/background.mp3`,
+  start: `${import.meta.env.BASE_URL}sounds/start.mp3`,
   correct: `${import.meta.env.BASE_URL}sounds/correct.wav`,
   mistake: `${import.meta.env.BASE_URL}sounds/mistake.wav`,
   gameOver: `${import.meta.env.BASE_URL}sounds/gameOver.wav`,
-  background: `${import.meta.env.BASE_URL}sounds/start.mp3`,
+  background: `${import.meta.env.BASE_URL}sounds/background.mp3`,
 };
 
 export default function useSound() {
   const audioElements = useRef<{ [key: string]: HTMLAudioElement }>({});
   const backgroundMusicRef = useRef<HTMLAudioElement | null>(null);
+  const startMusicRef = useRef<HTMLAudioElement | null>(null);
   
   useEffect(() => {
     Object.entries(SOUNDS).forEach(([key, url]) => {
@@ -26,6 +27,10 @@ export default function useSound() {
         audio.loop = true;
         audio.volume = 0.2;
         backgroundMusicRef.current = audio;
+      } else if (key === 'start') {
+        audio.loop = true;
+        audio.volume = 0.2;
+        startMusicRef.current = audio;
       } else {
         audio.volume = 0.4;
       }
@@ -43,7 +48,7 @@ export default function useSound() {
   
   const playSound = useCallback((type: SoundType) => {
     const audio = audioElements.current[type];
-    if (audio) {
+    if (audio && type !== 'start' && type !== 'background') {
       audio.currentTime = 0;
       audio.play().catch(e => console.error("Error playing sound:", e));
     }
@@ -63,6 +68,27 @@ export default function useSound() {
       backgroundMusicRef.current.currentTime = 0;
     }
   }, []);
+
+  const startMenuMusic = useCallback(() => {
+    if (startMusicRef.current) {
+      startMusicRef.current.play().catch(e => 
+        console.error("Error playing menu music:", e)
+      );
+    }
+  }, []);
   
-  return { playSound, startBackgroundMusic, stopBackgroundMusic };
+  const stopMenuMusic = useCallback(() => {
+    if (startMusicRef.current) {
+      startMusicRef.current.pause();
+      startMusicRef.current.currentTime = 0;
+    }
+  }, []);
+  
+  return { 
+    playSound, 
+    startBackgroundMusic, 
+    stopBackgroundMusic,
+    startMenuMusic,
+    stopMenuMusic
+  };
 }
