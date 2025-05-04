@@ -55,7 +55,7 @@ const countMistakes = (input: string, target: string): number => {
   }, 0);
 };
 
-const BASE_GHOST_SPEED = 0.2; // Initial speed for ghost movement
+const BASE_GHOST_SPEED = 0.7; // 0.2; // Initial speed for ghost movement
 const SPEED_INCREASE = 0.05;
 const SPEED_INCREASE_INTERVAL = 30; // seconds
 const SCORE_MULTIPLIER = 0.5; // Multiplier for score to progress bar impact
@@ -117,17 +117,16 @@ const gameReducer = (state: GameContextType, action: Action): GameContextType =>
       const currentSpeed = calculateGhostSpeed(state.timeElapsed);
       const newPosition = state.ghostPosition - currentSpeed;
       
-      if (newPosition <= 0) {
+      if (newPosition <= 0 && state.state === 'playing') {
         return {
           ...state,
           ghostPosition: 0,
-          state: 'gameover',
         };
       }
       
       return {
         ...state,
-        ghostPosition: newPosition,
+        ghostPosition: Math.max(0, newPosition),
       };
     case 'UPDATE_TIMER':
       return {
@@ -151,7 +150,7 @@ const gameReducer = (state: GameContextType, action: Action): GameContextType =>
 
 export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [gameState, dispatch] = useReducer(gameReducer, initialContext);
-  const { playSound } = useSound();
+  const { playSound, stopBackgroundMusic } = useSound();
   
   useEffect(() => {
     let timerInterval: number;
@@ -191,10 +190,20 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     if (gameState.ghostPosition <= 0 && gameState.state === 'playing') {
-      playSound('gameOver');
-      dispatch({ type: 'GAME_OVER' });
+      stopBackgroundMusic();
+      const gameOverAudio = new Audio(`${import.meta.env.BASE_URL}sounds/gameOver.wav`);
+      gameOverAudio.volume = 0.8; // Increased volume for game over sound
+      
+      gameOverAudio.addEventListener('ended', () => {
+        dispatch({ type: 'GAME_OVER' });
+      });
+      
+      gameOverAudio.play().catch(e => {
+        console.error("Error playing game over sound:", e);
+        dispatch({ type: 'GAME_OVER' });
+      });
     }
-  }, [gameState.ghostPosition, gameState.state, playSound]);
+  }, [gameState.ghostPosition, gameState.state, stopBackgroundMusic]);
 
   const value = {
     ...gameState,

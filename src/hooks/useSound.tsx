@@ -63,7 +63,7 @@ export default function useSound() {
   }, []);
   
   const stopBackgroundMusic = useCallback(() => {
-    if (backgroundMusicRef.current) {
+    if (backgroundMusicRef.current && !backgroundMusicRef.current.paused) {
       backgroundMusicRef.current.pause();
       backgroundMusicRef.current.currentTime = 0;
     }
