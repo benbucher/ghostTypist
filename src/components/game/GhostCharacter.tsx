@@ -23,12 +23,12 @@ const GhostCharacter: React.FC<GhostCharacterProps> = ({ position, isAngry }) =>
         <div className="absolute -bottom-2 md:-bottom-4 left-1/2 transform -translate-x-1/2 w-12 md:w-16 h-3 md:h-4 bg-purple-900/30 rounded-full filter blur-md"></div>
         
         <Ghost 
-          size={48}
+          size={80}
           className={`${
             isAngry 
               ? 'text-red-300 animate-ghost-angry' 
               : 'text-violet-300/90 animate-pulse'
-          } transition-colors duration-300 md:scale-150`}
+          } transition-colors duration-300`}
           strokeWidth={1.5}
         />
         
