@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { generateWord } from '../utils/wordGenerator';
 import useSound from '../hooks/useSound';
 
-export type GameState = 'start' | 'playing' | 'gameover';
+export type GameState = 'start' | 'playing' | 'dying' | 'gameover';
 
 interface GameContextType {
   state: GameState;
@@ -55,9 +55,9 @@ const countMistakes = (input: string, target: string): number => {
   }, 0);
 };
 
-const BASE_GHOST_SPEED = 0.7; // 0.2; // Initial speed for ghost movement
+const BASE_GHOST_SPEED = 0.4; // Initial speed for ghost movement
 const SPEED_INCREASE = 0.05;
-const SPEED_INCREASE_INTERVAL = 30; // seconds
+const SPEED_INCREASE_INTERVAL = 20; // seconds
 const SCORE_MULTIPLIER = 0.5; // Multiplier for score to progress bar impact
 const PERFECT_WORD_BONUS = 1; // Bonus character for perfect word completion
 
@@ -72,6 +72,7 @@ type Action =
   | { type: 'WORD_COMPLETED'; payload: { input: string; target: string } }
   | { type: 'UPDATE_GHOST' }
   | { type: 'UPDATE_TIMER' }
+  | { type: 'START_DYING' }
   | { type: 'GAME_OVER' }
   | { type: 'RESET_GAME' };
 
@@ -121,6 +122,7 @@ const gameReducer = (state: GameContextType, action: Action): GameContextType =>
         return {
           ...state,
           ghostPosition: 0,
+          state: 'dying',
         };
       }
       
@@ -132,6 +134,11 @@ const gameReducer = (state: GameContextType, action: Action): GameContextType =>
       return {
         ...state,
         timeElapsed: state.timeElapsed + 1,
+      };
+    case 'START_DYING':
+      return {
+        ...state,
+        state: 'dying',
       };
     case 'GAME_OVER':
       return {
@@ -189,21 +196,21 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [gameState.input, gameState.currentWord, gameState.state, playSound]);
 
   useEffect(() => {
-    if (gameState.ghostPosition <= 0 && gameState.state === 'playing') {
+    if (gameState.state === 'dying') {
       stopBackgroundMusic();
-      const gameOverAudio = new Audio(`${import.meta.env.BASE_URL}sounds/gameOver.wav`);
-      gameOverAudio.volume = 0.8; // Increased volume for game over sound
+      const audio = new Audio(`${import.meta.env.BASE_URL}sounds/gameOver.wav`);
+      audio.volume = 0.8;
       
-      gameOverAudio.addEventListener('ended', () => {
+      audio.addEventListener('ended', () => {
         dispatch({ type: 'GAME_OVER' });
       });
       
-      gameOverAudio.play().catch(e => {
+      audio.play().catch(e => {
         console.error("Error playing game over sound:", e);
         dispatch({ type: 'GAME_OVER' });
       });
     }
-  }, [gameState.ghostPosition, gameState.state, stopBackgroundMusic]);
+  }, [gameState.state, stopBackgroundMusic]);
 
   const value = {
     ...gameState,

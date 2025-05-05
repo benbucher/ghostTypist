@@ -31,7 +31,7 @@ const GameContainer: React.FC = () => {
   return (
     <div className="w-full max-w-4xl relative">
       {state === 'start' && <StartScreen />}
-      {state === 'playing' && <GameScreen />}
+      {(state === 'playing' || state === 'dying') && <GameScreen />}
       {state === 'gameover' && <GameOverScreen />}
     </div>
   );

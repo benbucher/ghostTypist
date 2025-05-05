@@ -31,6 +31,13 @@ export default function useSound() {
         audio.loop = true;
         audio.volume = 0.2;
         startMusicRef.current = audio;
+      } else if (key === 'gameOver') {
+        audio.volume = 0.9;
+        audio.addEventListener('ended', () => {
+          if (audio === audioElements.current.gameOver) {
+            audio.currentTime = 0;
+          }
+        });
       } else {
         audio.volume = 0.4;
       }
@@ -48,7 +55,12 @@ export default function useSound() {
   
   const playSound = useCallback((type: SoundType) => {
     const audio = audioElements.current[type];
-    if (audio && type !== 'start' && type !== 'background') {
+    if (!audio) return;
+
+    if (type === 'gameOver') {
+      audio.currentTime = 0;
+      audio.play().catch(e => console.error("Error playing game over sound:", e));
+    } else if (type !== 'start' && type !== 'background') {
       audio.currentTime = 0;
       audio.play().catch(e => console.error("Error playing sound:", e));
     }
@@ -63,7 +75,7 @@ export default function useSound() {
   }, []);
   
   const stopBackgroundMusic = useCallback(() => {
-    if (backgroundMusicRef.current && !backgroundMusicRef.current.paused) {
+    if (backgroundMusicRef.current) {
       backgroundMusicRef.current.pause();
       backgroundMusicRef.current.currentTime = 0;
     }
