@@ -56,7 +56,7 @@ const GameOverScreen: React.FC = () => {
         </motion.h1>
         
         <motion.div 
-          className="bg-gray-800 text-zinc-400 text-xl space-y-2 rounded-lg p-6 w-full max-w-xs"
+          className="bg-gray-800 text-zinc-400 text-xl space-y-2 rounded-lg p-6 w-full max-w-xs mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
