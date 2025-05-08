@@ -7,7 +7,7 @@ const StartScreen: React.FC = () => {
   
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
+      if (e.key === 'Enter' || e.key === ' ') {
         startGame();
       }
     };
@@ -40,7 +40,7 @@ const StartScreen: React.FC = () => {
         </button>
         
         <div className="mt-4 text-sky-400/80 text-sm hidden md:block">
-          <p>Press Enter to start</p>
+          <p>Press <kbd className="bg-gray-800 px-2 py-1 rounded">Enter</kbd> or <kbd className="bg-gray-800 px-2 py-1 rounded">Space</kbd> to start</p>
         </div>
       </div>
     </div>

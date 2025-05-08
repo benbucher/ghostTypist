@@ -7,7 +7,7 @@ const GameOverScreen: React.FC = () => {
   
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
+      if (e.key === 'Enter' || e.key === ' ') {
         handleTryAgain();
       }
     };
@@ -54,7 +54,7 @@ const GameOverScreen: React.FC = () => {
         </button>
         
         <div className="mt-4 text-sky-400/80 text-sm hidden md:block">
-          <p>Press Enter to try again</p>
+          <p>Press <kbd className="bg-gray-800 px-2 py-1 rounded">Enter</kbd> or <kbd className="bg-gray-800 px-2 py-1 rounded">Space</kbd> to try again</p>
         </div>
       </div>
     </div>
