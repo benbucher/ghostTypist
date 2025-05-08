@@ -7,6 +7,10 @@ export default {
         indigo: {
           950: '#1E1B4B', // Deep indigo for background
         },
+        ghost: {
+          DEFAULT: '#a78bfa',
+          dark: '#7c3aed',
+        },
       },
       animation: {
         pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',

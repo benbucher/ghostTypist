@@ -22,7 +22,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ ghostPosition }) => {
           <GhostCharacter position={ghostPosition} isAngry={isDanger} />
         </div>
         
-        <div className="overflow-hidden h-3 md:h-4 mb-2 text-xs flex rounded-full bg-indigo-900/50 backdrop-blur-sm border border-indigo-800">
+        <div className="overflow-hidden h-3 md:h-4 mb-2 text-xs flex rounded-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-800">
           <div 
             className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center transition-all duration-300 ${isDanger ? 'animate-pulse' : ''}`}
             style={{ 
@@ -33,13 +33,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ ghostPosition }) => {
         </div>
 
         <div className="flex items-center justify-between mt-1 md:mt-2">
-          <div className="text-xs md:text-sm font-medium text-violet-300 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-violet-300 rounded-full"></span>
+          <div className="text-xs md:text-sm font-medium text-zinc-400 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-ghost rounded-full"></span>
             You
           </div>
-          <div className="text-xs md:text-sm font-medium text-violet-300 flex items-center gap-2">
+          <div className="text-xs md:text-sm font-medium text-zinc-400 flex items-center gap-2">
             Ghost
-            <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-violet-300 rounded-full"></span>
+            <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-ghost rounded-full"></span>
           </div>
         </div>
         
