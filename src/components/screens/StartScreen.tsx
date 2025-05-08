@@ -40,7 +40,7 @@ const StartScreen: React.FC = () => {
         </button>
         
         <div className="mt-4 text-sky-400/80 text-sm hidden md:block">
-          <p>Press <kbd className="bg-gray-800 px-2 py-1 rounded">Enter</kbd> or <kbd className="bg-gray-800 px-2 py-1 rounded">Space</kbd> to start</p>
+          <p>Press <kbd className="bg-gray-800 px-2 py-1 rounded font-mono">Enter</kbd> or <kbd className="bg-gray-800 px-2 py-1 rounded font-mono">Space</kbd> to start</p>
         </div>
       </div>
     </div>

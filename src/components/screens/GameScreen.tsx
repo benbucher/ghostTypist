@@ -39,7 +39,7 @@ const GameScreen: React.FC = () => {
             type="text"
             value={input}
             onChange={handleInputChange}
-            className="w-full max-w-lg mx-auto block p-3 md:p-4 text-xl md:text-2xl text-center bg-slate-800 border-2 border-sky-500/50 rounded-lg focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-400/50 transition-all"
+            className="w-full max-w-lg mx-auto block p-3 md:p-4 text-xl md:text-2xl text-center bg-slate-800 border-2 border-sky-500/50 rounded-lg focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-400/50 transition-all font-mono tracking-wider"
             autoComplete="off"
             autoCapitalize="off"
             autoCorrect="off"
