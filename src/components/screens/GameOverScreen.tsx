@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useGame } from '../../context/GameContext';
-import { GhostIcon } from 'lucide-react';
+import { GhostIcon, Hourglass, Flame, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const GameOverScreen: React.FC = () => {
@@ -61,18 +61,27 @@ const GameOverScreen: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-        <div className="flex justify-between items-center mb-3">
-          <span>Score:</span>
-          <span className="text-zinc-200">{score}</span>
-        </div>
-        <div className="flex justify-between items-center mb-3">
-          <span>Time:</span>
-          <span className="text-zinc-200">{formatTime(timeElapsed)}</span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span>Mistakes:</span>
-          <span className="text-zinc-200">{mistakesMade}</span>
-        </div>
+          <div className="flex justify-between items-center mb-3">
+            <div className="flex items-center gap-2">
+              <Flame size={20} className="text-green-400" />
+              <span>Score</span>
+            </div>
+            <span className="text-zinc-200">{score}</span>
+          </div>
+          <div className="flex justify-between items-center mb-3">
+            <div className="flex items-center gap-2">
+              <Hourglass size={20} className="text-ghost" />
+              <span>Time</span>
+            </div>
+            <span className="text-zinc-200">{formatTime(timeElapsed)}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <X size={20} className="text-red-400" />
+              <span>Mistakes</span>
+            </div>
+            <span className="text-zinc-200">{mistakesMade}</span>
+          </div>
         </motion.div>
         
         <motion.button 
