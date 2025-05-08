@@ -56,14 +56,23 @@ const GameOverScreen: React.FC = () => {
         </motion.h1>
         
         <motion.div 
-          className="text-zinc-400 text-xl space-y-2"
+          className="bg-gray-800 text-zinc-400 text-xl space-y-2 rounded-lg p-6 w-full max-w-xs"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <p>Time Survived: <span className="text-zinc-200">{formatTime(timeElapsed)}</span></p>
-          <p>Final Score: <span className="text-zinc-200">{score}</span></p>
-          <p>Mistakes Made: <span className="text-zinc-200">{mistakesMade}</span></p>
+        <div className="flex justify-between items-center mb-3">
+          <span>Score:</span>
+          <span className="text-zinc-200">{score}</span>
+        </div>
+        <div className="flex justify-between items-center mb-3">
+          <span>Time:</span>
+          <span className="text-zinc-200">{formatTime(timeElapsed)}</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span>Mistakes:</span>
+          <span className="text-zinc-200">{mistakesMade}</span>
+        </div>
         </motion.div>
         
         <motion.button 
