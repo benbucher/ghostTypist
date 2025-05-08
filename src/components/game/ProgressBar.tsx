@@ -7,9 +7,12 @@ interface ProgressBarProps {
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ ghostPosition }) => {
   const getBarColor = () => {
-    const red = Math.round(255 * (1 - ghostPosition / 100));
-    const green = Math.round(255 * (ghostPosition / 100));
-    return `rgb(${red}, ${green}, 0)`;
+    // When ghostPosition is 100%, use ghost color rgb(167, 139, 250))
+    // When ghostPosition is 0%, use ghost-red color rgb(229, 115, 115))
+    const r = Math.round(167 + (229 - 167) * (1 - ghostPosition / 100));
+    const g = Math.round(139 + (115 - 139) * (1 - ghostPosition / 100));
+    const b = Math.round(250 + (115 - 250) * (1 - ghostPosition / 100));
+    return `rgb(${r}, ${g}, ${b})`;
   };
   
   const isDanger = ghostPosition <= 40;
@@ -45,7 +48,10 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ ghostPosition }) => {
         
         <div className="h-4 md:h-6 mt-1 md:mt-2">
           {isDanger && (
-            <div className="text-center text-red-400 text-xs md:text-sm font-medium animate-pulse">
+            <div 
+              className="text-center text-xs md:text-sm font-medium animate-pulse"
+              style={{ color: getBarColor() }}
+            >
               {isCritical ? 'DANGER! Ghost is very close!' : 'Warning! Ghost approaching!'}
             </div>
           )}
