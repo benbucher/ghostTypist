@@ -53,7 +53,7 @@ const GameOverScreen: React.FC = () => {
           Try Again
         </button>
         
-        <div className="mt-4 text-sky-400/80 text-sm hidden md:block">
+        <div className="mt-4 text-sky-400/80 text-base hidden md:block">
           <p>Press <kbd className="bg-gray-800 px-2 py-1 rounded font-mono">Enter</kbd> or <kbd className="bg-gray-800 px-2 py-1 rounded font-mono">Space</kbd> to try again</p>
         </div>
       </div>
