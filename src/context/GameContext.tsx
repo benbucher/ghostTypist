@@ -187,17 +187,26 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     if (gameState.state === 'dying') {
       stopBackgroundMusic();
-      const audio = new Audio(`${import.meta.env.BASE_URL}sounds/gameOver.wav`);
-      audio.volume = GAME_CONFIG.audio.VOLUMES.GAME_OVER;
       
-      audio.addEventListener('ended', () => {
-        dispatch({ type: 'GAME_OVER' });
-      });
+      playSound('gameOver')
+        .then(audio => {
+          audio!.addEventListener('ended', () => {
+            dispatch({ type: 'GAME_OVER' });
+          });
+        })
+        .catch(e => {
+          console.error("Error playing game over sound:", e);
+          dispatch({ type: 'GAME_OVER' });
+        });
+
+      // audio.addEventListener('ended', () => {
+      //   dispatch({ type: 'GAME_OVER' });
+      // });
       
-      audio.play().catch(e => {
-        console.error("Error playing game over sound:", e);
-        dispatch({ type: 'GAME_OVER' });
-      });
+      // audio.play().catch(e => {
+      //   console.error("Error playing game over sound:", e);
+      //   dispatch({ type: 'GAME_OVER' });
+      // });
     }
   }, [gameState.state, stopBackgroundMusic]);
 

@@ -4,6 +4,7 @@ import StartScreen from './screens/StartScreen';
 import GameScreen from './screens/GameScreen';
 import GameOverScreen from './screens/GameOverScreen';
 import useSound from '../hooks/useSound';
+import SoundToggle from './SoundToggle';
 
 const GameContainer: React.FC = () => {
   const { state } = useGame();
@@ -33,6 +34,7 @@ const GameContainer: React.FC = () => {
       {state === 'start' && <StartScreen />}
       {(state === 'playing' || state === 'dying') && <GameScreen />}
       {state === 'gameover' && <GameOverScreen />}
+      <SoundToggle/>
     </div>
   );
 };

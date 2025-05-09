@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { GAME_CONFIG } from '../config/gameConfig';
+import { useSoundStore } from '../store/soundStore';
 
 type SoundType = 'start' | 'correct' | 'mistake' | 'gameOver' | 'background';
 
@@ -23,6 +24,7 @@ export default function useSound() {
   const audioElements = useRef<AudioRefs>({});
   const backgroundMusicRef = useRef<HTMLAudioElement | null>(null);
   const startMusicRef = useRef<HTMLAudioElement | null>(null);
+  const { playAudio } = useSoundStore()
 
   const initializeAudio = useCallback((key: SoundType, url: string) => {
     const audio = new Audio(url);
@@ -62,22 +64,20 @@ export default function useSound() {
     };
   }, [initializeAudio]);
 
-  const playSound = useCallback((type: SoundType) => {
+  const playSound = useCallback(async (type: SoundType) => {
     const audio = audioElements.current[type];
-    if (!audio) return;
 
-    if (type === 'gameOver') {
+    if (type !== 'start' && type !== 'background') {
       audio.currentTime = 0;
-      audio.play().catch(e => console.error("Error playing game over sound:", e));
-    } else if (type !== 'start' && type !== 'background') {
-      audio.currentTime = 0;
-      audio.play().catch(e => console.error("Error playing sound:", e));
+      return playAudio(audio)
+        .then(() => audio)
+        .catch(e => console.error("Error playing sound:", e));
     }
-  }, []);
+  }, [playAudio]);
 
   const startBackgroundMusic = useCallback(() => {
     if (backgroundMusicRef.current) {
-      backgroundMusicRef.current.play().catch(e => 
+      playAudio(backgroundMusicRef.current).catch(e => 
         console.error("Error playing background music:", e)
       );
     }
@@ -92,7 +92,7 @@ export default function useSound() {
 
   const startMenuMusic = useCallback(() => {
     if (startMusicRef.current) {
-      startMusicRef.current.play().catch(e => 
+      playAudio(startMusicRef.current).catch(e => 
         console.error("Error playing menu music:", e)
       );
     }
