@@ -26,8 +26,8 @@ const GhostCharacter: React.FC<GhostCharacterProps> = ({ position, isAngry }) =>
           size={80}
           className={`${
             isAngry 
-              ? 'text-red-300 animate-ghost-angry' 
-              : 'text-ghost animate-pulse'
+              ? 'text-red-300 opacity-90 animate-ghost-angry md:w-28 md:h-28 w-20 h-20' 
+              : 'text-ghost opacity-90 animate-pulse md:w-28 md:h-28 w-20 h-20'
           } transition-colors duration-300`}
           strokeWidth={1.5}
         />
