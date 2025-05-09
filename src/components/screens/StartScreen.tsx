@@ -34,7 +34,7 @@ const StartScreen: React.FC = () => {
         </div>
         
         <motion.h1 
-          className="text-7xl font-medium mb-4 tracking-tight text-zinc-100"
+          className="text-5xl md:text-7xl font-medium mb-4 tracking-tight text-zinc-100"
           initial={{ y: -20 }}
           animate={{ y: 0 }}
         >
@@ -42,7 +42,7 @@ const StartScreen: React.FC = () => {
         </motion.h1>
         
         <motion.p 
-          className="text-zinc-400 text-xl max-w-lg mx-auto mb-8 leading-relaxed"
+          className="text-zinc-400 text-lg md:text-xl max-w-lg mx-auto mb-6 md:mb-8 leading-relaxed px-4 md:px-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -53,7 +53,7 @@ const StartScreen: React.FC = () => {
         
         <motion.button 
           onClick={startGame}
-          className="px-8 py-3 bg-ghost-dark/90 hover:bg-ghost-dark text-white rounded-lg text-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-ghost-dark/20 focus:outline-none focus:ring-2 focus:ring-ghost/50"
+          className="px-6 md:px-8 py-2.5 md:py-3 bg-ghost-dark/90 hover:bg-ghost-dark text-white rounded-lg text-base md:text-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-ghost-dark/20 focus:outline-none focus:ring-2 focus:ring-ghost/50"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
