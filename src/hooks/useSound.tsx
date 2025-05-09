@@ -32,14 +32,14 @@ export default function useSound() {
         audio.volume = 0.2;
         startMusicRef.current = audio;
       } else if (key === 'gameOver') {
-        audio.volume = 0.9;
+        audio.volume = 1.0;
         audio.addEventListener('ended', () => {
           if (audio === audioElements.current.gameOver) {
             audio.currentTime = 0;
           }
         });
       } else {
-        audio.volume = 0.4;
+        audio.volume = 0.2;
       }
       
       audioElements.current[key] = audio;

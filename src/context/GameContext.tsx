@@ -199,7 +199,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (gameState.state === 'dying') {
       stopBackgroundMusic();
       const audio = new Audio(`${import.meta.env.BASE_URL}sounds/gameOver.wav`);
-      audio.volume = 0.8;
+      audio.volume = 1.0;
       
       audio.addEventListener('ended', () => {
         dispatch({ type: 'GAME_OVER' });
