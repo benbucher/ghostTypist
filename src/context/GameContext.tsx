@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { generateWord } from '../utils/wordGenerator';
 import useSound from '../hooks/useSound';
+import { GAME_CONFIG } from '../config/gameConfig';
 
 export type GameState = 'start' | 'playing' | 'dying' | 'gameover';
 
-interface GameContextType {
+export interface GameContextType {
   state: GameState;
   currentWord: string;
   input: string;
@@ -35,35 +36,20 @@ const initialContext: GameContextType = {
 const GameContext = createContext<GameContextType>(initialContext);
 
 const calculateWordScore = (input: string, target: string): number => {
-  let correctChars = 0;
-  let wrongChars = 0;
-  
-  input.split('').forEach((char, index) => {
-    if (char === target[index]) {
-      correctChars++;
-    } else {
-      wrongChars++;
-    }
-  });
-  
-  return correctChars;
+  return input.split('').reduce((score, char, index) => 
+    score + (char === target[index] ? 1 : 0), 0
+  );
 };
 
 const countMistakes = (input: string, target: string): number => {
-  return input.split('').reduce((mistakes, char, index) => {
-    return mistakes + (char !== target[index] ? 1 : 0);
-  }, 0);
+  return input.split('').reduce((mistakes, char, index) => 
+    mistakes + (char !== target[index] ? 1 : 0), 0
+  );
 };
 
-const BASE_GHOST_SPEED = 0.4; // [%] Initial speed for ghost movement as percentage from the progress bar
-const SPEED_INCREASE = 0.05; // [%] Increase in speed added to BASE_GHOST_SPEED every SPEED_INCREASE_INTERVAL
-const SPEED_INCREASE_INTERVAL = 20; // [s] Time interval for speed increase
-const SCORE_MULTIPLIER = 0.5; // Multiplier for score to progress bar impact
-const PERFECT_WORD_BONUS = 1; // Bonus character for perfect word completion
-
 const calculateGhostSpeed = (timeElapsed: number): number => {
-  const speedIncrements = Math.floor(timeElapsed / SPEED_INCREASE_INTERVAL);
-  return BASE_GHOST_SPEED + (speedIncrements * SPEED_INCREASE);
+  const speedIncrements = Math.floor(timeElapsed / GAME_CONFIG.ghost.SPEED_INCREASE_INTERVAL);
+  return GAME_CONFIG.ghost.BASE_SPEED + (speedIncrements * GAME_CONFIG.ghost.SPEED_INCREASE);
 };
 
 type Action =
@@ -99,11 +85,12 @@ const gameReducer = (state: GameContextType, action: Action): GameContextType =>
         input: action.payload,
         isGhostAngry: false,
       };
-    case 'WORD_COMPLETED':
+    case 'WORD_COMPLETED': {
       const wordScore = calculateWordScore(action.payload.input, action.payload.target);
       const mistakes = countMistakes(action.payload.input, action.payload.target);
       const isPerfectWord = action.payload.input === action.payload.target;
-      const positionChange = (wordScore * SCORE_MULTIPLIER) + (isPerfectWord ? PERFECT_WORD_BONUS : 0);
+      const positionChange = (wordScore * GAME_CONFIG.scoring.SCORE_MULTIPLIER) + 
+        (isPerfectWord ? GAME_CONFIG.scoring.PERFECT_WORD_BONUS : 0);
       
       return {
         ...state,
@@ -114,7 +101,8 @@ const gameReducer = (state: GameContextType, action: Action): GameContextType =>
         mistakesMade: state.mistakesMade + mistakes,
         isGhostAngry: mistakes > 0,
       };
-    case 'UPDATE_GHOST':
+    }
+    case 'UPDATE_GHOST': {
       const currentSpeed = calculateGhostSpeed(state.timeElapsed);
       const newPosition = state.ghostPosition - currentSpeed;
       
@@ -130,6 +118,7 @@ const gameReducer = (state: GameContextType, action: Action): GameContextType =>
         ...state,
         ghostPosition: Math.max(0, newPosition),
       };
+    }
     case 'UPDATE_TIMER':
       return {
         ...state,
@@ -199,7 +188,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (gameState.state === 'dying') {
       stopBackgroundMusic();
       const audio = new Audio(`${import.meta.env.BASE_URL}sounds/gameOver.wav`);
-      audio.volume = 1.0;
+      audio.volume = GAME_CONFIG.audio.VOLUMES.GAME_OVER;
       
       audio.addEventListener('ended', () => {
         dispatch({ type: 'GAME_OVER' });
