@@ -1,15 +1,10 @@
 import React from 'react';
 import { useGame } from '../../context/GameContext';
-import { Hourglass, Star, Skull, X, Flame } from 'lucide-react';
+import { Hourglass, X, Flame } from 'lucide-react';
+import { formatTime } from '../../utils/formatting';
 
 const GameStats: React.FC = () => {
   const { score, timeElapsed, mistakesMade } = useGame();
-  
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
   
   return (
     <div className="flex justify-between items-center max-w-2xl mx-auto bg-zinc-900/50 backdrop-blur-sm rounded-lg p-2 md:p-4 border border-zinc-800">
