@@ -27,9 +27,9 @@ const StartScreen: React.FC = () => {
       <div className="relative z-10 space-y-8">
         <div className="mb-8 animate-float">
           <GhostIcon 
-            size={128}
+            size={96}
             strokeWidth={1.8}
-            className="mx-auto text-ghost opacity-90 animate-pulse" 
+            className="mx-auto text-ghost opacity-90 animate-pulse md:w-32 md:h-32 w-24 h-24" 
           />
         </div>
         
@@ -42,7 +42,7 @@ const StartScreen: React.FC = () => {
         </motion.h1>
         
         <motion.p 
-          className="text-zinc-400 text-lg md:text-xl max-w-lg mx-auto mb-6 md:mb-8 leading-relaxed px-4 md:px-0"
+          className="text-zinc-400 text-sm md:text-xl max-w-lg mx-auto mb-6 md:mb-8 leading-relaxed px-4 md:px-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
