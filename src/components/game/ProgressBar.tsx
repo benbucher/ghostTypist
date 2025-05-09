@@ -19,7 +19,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ ghostPosition }) => {
   const isCritical = ghostPosition <= 20;
   
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    // Padding is added corresponding to half of the ghost size so as the ghost is entirely visible on screen at game start
+    <div className="w-full max-w-3xl mx-auto px-10 md:px-14"> 
       <div className="relative pt-1">
         <div className="relative h-20 md:h-32 mb-2 md:mb-4">
           <GhostCharacter position={ghostPosition} isAngry={isDanger} />
