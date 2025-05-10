@@ -198,15 +198,6 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
           console.error("Error playing game over sound:", e);
           dispatch({ type: 'GAME_OVER' });
         });
-
-      // audio.addEventListener('ended', () => {
-      //   dispatch({ type: 'GAME_OVER' });
-      // });
-      
-      // audio.play().catch(e => {
-      //   console.error("Error playing game over sound:", e);
-      //   dispatch({ type: 'GAME_OVER' });
-      // });
     }
   }, [gameState.state, stopBackgroundMusic]);
 

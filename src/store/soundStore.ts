@@ -9,7 +9,7 @@ interface SoundState {
 }
 
 export const useSoundStore = create<SoundState>((set) => ({
-  volume: 1,
+  volume: 0,
   playingAudios: [],
   playAudio: (audio: HTMLAudioElement) => {
     set(state => {

@@ -10,9 +10,9 @@ export const GAME_CONFIG = {
   },
   audio: {
     VOLUMES: {
-      BACKGROUND: 0.2,
-      EFFECTS: 0.2,
-      GAME_OVER: 1.0,
+      BACKGROUND: 0.1,
+      EFFECTS: 0.1,
+      GAME_OVER: 0.4,
     },
   },
 } as const; 
