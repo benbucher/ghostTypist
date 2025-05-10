@@ -7,7 +7,7 @@ const GameStats: React.FC = () => {
   const { score, timeElapsed, mistakesMade } = useGame();
   
   return (
-    <div className="flex justify-between items-center max-w-2xl mx-auto bg-zinc-900/50 backdrop-blur-sm rounded-lg p-2 md:p-4 border border-zinc-800">
+    <div className="flex justify-between items-center max-w-2xl mx-auto bg-zinc-900/50 backdrop-blur-sm rounded-lg p-1 md:p-4 border border-zinc-800">
       <div className="flex items-center space-x-1 md:space-x-2">
         <Hourglass size={16} className="text-ghost md:scale-125" />
         <span className="text-base md:text-xl font-medium">{formatTime(timeElapsed)}</span>
